@@ -1,0 +1,152 @@
+<form name="userForm" form-on-change="formSubmitted = false" ng-submit="formSubmitted = true; goNext(userForm.$valid);" novalidate>
+    <div class="content india-grid">
+        <h3 ng-show="currentPerson == 0">Let’s start with {{ currentPersonInfo.firstName }}.</h3>
+        <h3 ng-show="!(currentPerson % 2 === 0) && (currentPerson > 0)">Okay, and now for {{ currentPersonInfo.firstName }}.</h3>
+        <h3 ng-show="(currentPerson % 2 === 0) && currentPerson != 0">Great, how about {{ currentPersonInfo.firstName }}?</h3>
+        <div class="hr"></div>
+        <div
+            class="error-wrapper"
+            ng-class="{ 'india-input-error': userForm.workIncomeYes.$invalid && formSubmitted }">
+            <div class="india-grid-full">
+                <div class="india-width-one-half">
+                    <p>Does {{ currentPersonInfo.firstName }} earn income from work?</p>
+                </div>
+                <div class="india-width-one-half">
+                    <p>
+                        <input
+                            type="radio"
+                            id="workIncomeYes"
+                            name="workIncomeYes"
+                            ng-value="true"
+                            ng-model="currentPersonInfo.workIncome"
+                            required>
+                        <label for="workIncomeYes">Yes</label>
+                        <input
+                            type="radio"
+                            id="workIncomeNo"
+                            name="workIncomeNo"
+                            ng-value="false"
+                            ng-model="currentPersonInfo.workIncome"
+                            ng-change="currentPersonInfo.workIncomeAmount = ''; currentPersonInfo.workIncomeFrequency = ''"
+                            required>
+                        <label for="workIncomeNo">No</label>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div
+            class="india-grid-full error-wrapper ng-slide-down"
+            ng-form="subForm1"
+            ng-class="{ 'india-input-error' : userForm.subForm1.$invalid && formSubmitted } "
+            ng-if="currentPersonInfo.workIncome">
+            <div class="india-width-one-half">
+                <p>Write {{ currentPersonInfo.firstName }}'s earnings here (before tax).</p>
+            </div>
+            <div class="india-width-one-half">
+                <div class="india-grid-full income-input">
+                    <div class="india-width-one-half">
+                        <label>How much?</label>
+                        <div class="dollar-sign">
+                            <input type="number" ng-model="currentPersonInfo.workIncomeAmount" name="incomeAmount" required>
+                        </div>
+                    </div>
+                    <div class="india-width-one-half">
+                        <label for="frequency">How often?</label>
+                        <select
+                        name="incomeFrequency" id="frequency"
+                        ng-model="currentPersonInfo.workIncomeFrequency"
+                        ng-options="item.id as item.name for item in frequencyValues"
+                        required>
+                        </select>
+                        <i class="fa fa-question-circle" ng-click="$parent.showModal = true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="error-wrapper" ng-class="{ 'india-input-error': userForm.secondIncomeYes.$invalid && formSubmitted }">
+            <div class="india-grid-full compact" ng-if="!newSubmission.programs">
+                <div class="india-width-one-half">
+                    <p>Does {{ currentPersonInfo.firstName }} recieve public assistance, child support, retirement, pensions, alimony, or any other form of income?</p>
+                </div>
+                <div class="india-width-one-half">
+                    <p>
+                        <input
+                            type="radio"
+                            id="secondIncomeYes"
+                            name="secondIncomeYes"
+                            ng-value="true"
+                            ng-model="currentPersonInfo.secondIncome"
+                            required>
+                        <label for="secondIncomeYes">Yes</label>
+                        <input
+                            type="radio"
+                            id="secondIncomeNo"
+                            name="secondIncomeNo"
+                            ng-value="false"
+                            ng-model="currentPersonInfo.secondIncome"
+                            ng-change="currentPersonInfo.secondIncomeAmount = ''; currentPersonInfo.secondIncomeFrequency = ''"
+                            required>
+                        <label for="secondIncomeNo">No</label>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="india-grid-full error-wrapper ng-slide-down"
+            ng-form="subForm2"
+            ng-class="{ 'india-input-error' : userForm.subForm2.$invalid && formSubmitted } "
+            ng-if="currentPersonInfo.secondIncome">
+            <div class="india-width-one-half">
+                <p>Write {{ currentPersonInfo.firstName }}'s total income from these sources.<p>
+            </div>
+            <div class="india-width-one-half">
+                <div class="india-grid-full income-input">
+                    <div class="india-width-one-half">
+                        <label>How much?</label>
+                        <div class="dollar-sign">
+                            <input type="number" ng-model="currentPersonInfo.secondIncomeAmount" name="incomeAmount" required>
+                        </div>
+                    </div>
+                    <div class="india-width-one-half" ng-class="{ 'input-error-income' : subForm2.incomeFrequency.$invalid && subForm2.incomeFrequency.$touched || userForm.subForm2.$invalid && formSubmitted }">
+                        <label for="frequency">How often?</label>
+                        <select
+                        name="incomeFrequency"
+                        id="frequency"
+                        ng-model="currentPersonInfo.secondIncomeFrequency"
+                        ng-options="item.id as item.name for item in frequencyValues"
+                        required>
+                        </select>
+                        <i class="fa fa-question-circle" ng-click="$parent.showModal = true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="india-grid-full ng-slide-down"
+            ng-if="userForm.$valid">
+            <div class="india-alert india-alert-info">
+                <div class="india-alert-body">
+                  <p class="india-alert-text">The income information is really important. You said {{ currentPersonInfo.firstName }}'s income is ${{ (currentPersonInfo.workIncomeAmount * currentPersonInfo.workIncomeFrequency) + (currentPersonInfo.secondIncomeAmount * currentPersonInfo.secondIncomeFrequency) }} per year. If that sounds right, go ahead and continue.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="india-input-error india-grid-full ng-slide-down" ng-if="userForm.$invalid && formSubmitted"><p class="india-input-error-message">You're missing some information. All of these questions are required.</p></div>
+    </div>
+    <footer class="footer-controls clearfix">
+        <button type="Submit" class="india-button primary-action">Next</button>
+        <div ng-click="goBack();" class="back-button"><i class="fa fa-angle-left"></i>Back</div>
+    </footer>
+    <div class="modal-wrapper" ng-show="showModal">
+        <div class="modal-container">
+            <p>This field indicates how often the income amount is earned. For example:</p>
+            <p><strong>2x per month:</strong> some months have 5 weeks, but if you get paid exactly twice per month then you're paid 24 times per year.</p>
+            <p><strong>Bi-weekly:</strong> this is exactly every other week, or 26 times a year (because there are 52 weeks in a year).</p>
+            <i class="fa fa-times-circle" ng-click="showModal = false"></i>
+        </div>
+    </div>
+</form>

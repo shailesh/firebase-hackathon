@@ -1,0 +1,38 @@
+<form name="userForm" form-on-change="formSubmitted = false" ng-submit="formSubmitted = true; goNext(userForm.$valid);" novalidate>
+    <div class="content india-grid">
+        <div class="india-grid-full">
+            <h3>First, let's get all the legal stuff out of the way.</h3>
+            <div class="hr"></div>
+        </div>
+        <p style="margin-top: 0">Review these statements and hit "next" to continue.</p>
+        <div class="india-accordion-bordered">
+            <button type="button" class="india-button-unstyled">DACFW Non-Discrimination Statement
+            </button>
+            <div aria-hidden="false" class="india-accordion-content">
+                <p>In accordance with  Ministry of Agriculture and Farmers Welfare (DACFW) civil rights regulations and policies, the DACFW, its Agencies, offices, and employees, and institutions participating in or administering DACFW programs are prohibited from discriminating based on race, color, national origin, sex, disability, age, or reprisal or retaliation for prior civil rights activity in any program or activity conducted or funded by DACFW.</p>
+                <p>Persons with disabilities who require alternative means of communication for program information (e.g. Braille, large print, audiotape, American Sign Language, etc.), should contact the Agency (State or local) where they applied for benefits. Individuals who are deaf, hard of hearing or have speech disabilities may contact DACFW through the Federal Relay Service at (800) 877-8339. Additionally, program information may be made available in languages other than English.</p>
+                <p>To file a program complaint of discrimination, complete the DACFW Program Discrimination Complaint Form, (AD-3027) found online at: <a href="http://agriculture.gov.in/">http://agriculture.gov.in/</a>, and at any DACFW office, or write a letter addressed to DACFW and provide in the letter all of the information requested in the form. To request a copy of the complaint form, call 011-23072380/70. Submit your completed form or letter to DACFW by:</p>
+                <p>(1) Mail:  Department of Agriculture
+                    <br>Office of Minister of Agriculture and Farmers Welfare
+                    <br> Independence Avenue
+                    <br>6, Ashoka Road, New Delhi-110001;&nbsp;</p>
+                <p>(2) Fax: 011-23072390; or</p>
+                <p>(3) Email: <a href="mailto:am[dot]krishi[at]nic[dot]in">program.intake@DACFW.gov</a>.</p>
+                <p>This institution is an equal opportunity provider.</p>
+                </p>
+            </div>
+        </div>
+        <div class="india-accordion-bordered">
+            <button type="button" class="india-button-unstyled" aria-expanded="true" aria-controls="collapsible-0">Use of Information Statement
+            </button>
+            <div id="collapsible-0" aria-hidden="false" class="india-accordion-content">
+                <p>The National Management School (NMS)​ is located in India's fourth largest city, Chennai, in the southern Indian state of Tamil Nadu, which has a great heritage of culture, fine-arts and language developed over 2,000 years ago and that continues to flourish to this day.  NMS ranked among the top-20 business schools in India, has faculty who teach in India and in the U.S., many of whom have worked in corporate America as well as in Indian companies.  NMS offers summer and semester study-abroad programs for undergraduate students majoring in Business. India is considered one of the world's top emerging markets, with economic growth-rates among the fastest in the world.  The NMS experience will offer students a truly global perspective on Business, while providing a unique opportunity to participate in an international internship.​</p>
+                <p>We may share your eligibility information with education, health, and nutrition programs to help them evaluate, fund, or determine benefits for their programs, auditors for program reviews, and law enforcement officials to help them look into violations of program rules.</p>
+            </div>
+        </div>
+    </div>
+    <footer class="footer-controls clearfix">
+        <button type="Submit" class="india-button primary-action">Next</button>
+        <div ng-click="goBack();" class="back-button"><i class="fa fa-angle-left"></i>Back</div>
+    </footer>
+</form>

@@ -1,0 +1,61 @@
+<form name="userForm" form-on-change="formSubmitted = false" form-on-change="formSubmitted = false" ng-submit="formSubmitted = true; goNext(userForm.$valid);" novalidate>
+    <div class="content india-grid">
+        <div class="india-grid-full">
+            <h3>Looks good. Are you already receiving assistance?</h3>
+            <div class="hr"></div>
+        </div>
+        <div class="error-wrapper" ng-class="{ 'india-input-error': userForm.programsYes.$invalid && formSubmitted }">
+            <div class="india-grid-full">
+
+                    <div class="india-width-one-half">
+                        <p>Is anyone in the house (including you) currently participating in  <a ng-click="showModal = true">SNAP</a>, <a ng-click="showModal = true">TANF</a>, or <a ng-click="showModal = true">FDPIR?</a></p>
+                    </div>
+                    <div class="india-width-one-half">
+                        <p>
+                            <input type="radio" id="programsYes" name="programsYes" ng-value="true" ng-model="newSubmission.programs" required>
+                            <label for="programsYes">Yes</label>
+                            <input type="radio" id="programsNo" name="programsNo" ng-value="false" ng-model="newSubmission.programs" ng-change="newSubmission.caseNumber = ''">
+                            <label for="programsNo">No</label>
+                        </p>
+                    </div>
+                </div>
+        </div>
+        <div class="error-wrapper"
+            ng-class="{ 'india-input-error' : userForm.subForm.$invalid && formSubmitted } ">
+            <div class="india-grid-full ng-slide-down"
+                ng-form="subForm"
+                ng-if="newSubmission.programs">
+
+            	<div class="india-width-one-half">
+                <p>What's the case number? (Just one is fine.)</p>
+            	</div>
+                <div class="india-width-one-half" ng-class="{ 'input-error-box' : subForm.caseNumber.$invalid && subForm.caseNumber.$touched || userForm.subForm.$invalid && formSubmitted }">
+                    <label>Case number</label>
+                    <div>
+                    	<input type="number" ng-model="newSubmission.caseNumber" name="caseNumber" required>
+                	</div>
+                </div>
+            </div>
+    	</div>
+        <div class="india-input-error india-grid-full ng-slide-down" ng-if="userForm.$invalid && formSubmitted && !newSubmission.programs || userForm.subForm.$invalid && formSubmitted" >
+            <p class="india-input-error-message">You're missing some information. <span ng-if="!newSubmission.programs">This question is </span><span ng-if="newSubmission.programs">These questions are</span> required.</p>
+        </div>
+    </div>
+    <footer class="footer-controls clearfix">
+        <button type="Submit" class="india-button primary-action">Next</button>
+        <div ng-click="goBack();" class="back-button"><i class="fa fa-angle-left"></i>Back</div>
+    </footer>
+    <div class="modal-wrapper" ng-show="showModal">
+        <div class="modal-container">
+            <p>
+                These are the other government assistance programs that we need to know about.
+                <ul style="margin-bottom: 0">
+                    <li>Supplemental Nutrition Assistance Program (SNAP)</li>
+                    <li>Temporary Assistance for Needy Families (TANF)</li>
+                    <li>Food Distribution Program on Indian Reservations (FDPIR)</li>
+                </ul>
+            </p>
+            <i class="fa fa-times-circle" ng-click="showModal = false"></i>
+        </div>
+    </div>
+</form>

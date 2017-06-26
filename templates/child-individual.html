@@ -1,0 +1,115 @@
+<form name="userForm" form-on-change="formSubmitted = false" ng-submit="formSubmitted = true; goNext(userForm.$valid);" novalidate>
+    <div class="content india-grid">
+        <h3 ng-show="currentPerson == 0">Okay, let’s start with {{ currentPersonInfo.firstName }}.</h3>
+        <h3 ng-show="(currentPerson % 2 === 0) && currentPerson != 0">Great, how about {{ currentPersonInfo.firstName }}?</h3>
+        <h3 ng-show="!(currentPerson % 2 === 0) && (currentPerson > 0)">Okay, and now for {{ currentPersonInfo.firstName }}.</h3>
+        <div class="hr"></div>
+        <div class="error-wrapper" ng-class="{ 'india-input-error': userForm.studentYes.$invalid && formSubmitted }">
+            <div class="india-grid-full compact">
+                <div class="india-width-one-half">
+                    <p>Is {{ currentPersonInfo.firstName }} a student?</p>
+                </div>
+                <div class="india-width-one-half">
+                    <p>
+                        <input type="radio" id="studentYes" name="studentYes" ng-value="true" ng-model="currentPersonInfo.student" required>
+                        <label for="studentYes">Yes</label>
+                        <input type="radio" id="studentNo" name="studentNo" ng-value="false" ng-model="currentPersonInfo.student">
+                        <label for="studentNo">No</label>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="error-wrapper" ng-class="{ 'india-input-error': userForm.fosterChildYes.$invalid && formSubmitted }">
+            <div class="india-grid-full compact" ng-if="!newSubmission.programs">
+                <div class="india-width-one-half">
+                    <p>Is {{ currentPersonInfo.firstName }} a foster child?</p>
+                </div>
+                <div class="india-width-one-half">
+                    <p>
+                        <input type="radio" id="fosterChildYes" name="fosterChildYes" ng-value="true" ng-model="currentPersonInfo.fosterChild" required>
+                        <label for="fosterChildYes">Yes</label>
+                        <input type="radio" id="fosterChildNo" name="fosterChildNo" ng-value="false" ng-model="currentPersonInfo.fosterChild">
+                        <label for="fosterChildNo">No</label>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="error-wrapper" ng-class="{ 'india-input-error': userForm.homelessMigrantRunawayYes.$invalid && formSubmitted }">
+            <div class="india-grid-full compact" ng-if="!newSubmission.programs">
+                <div class="india-width-one-half">
+                    <p>Is {{ currentPersonInfo.firstName }} homeless, a migrant, a runaway, or Head Start participant?</p>
+                </div>
+                <div class="india-width-one-half">
+                    <p>
+                        <input type="radio" id="homelessMigrantRunawayYes" name="homelessMigrantRunawayYes" ng-value="true" ng-model="currentPersonInfo.homelessMigrantRunaway" required>
+                        <label for="homelessMigrantRunawayYes">Yes</label>
+                        <input type="radio" id="homelessMigrantRunawayNo" name="homelessMigrantRunawayNo" ng-value="false" ng-model="currentPersonInfo.homelessMigrantRunaway">
+                        <label for="homelessMigrantRunawayNo">No</label>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="error-wrapper" ng-class="{ 'india-input-error': userForm.incomeYes.$invalid && formSubmitted }">
+            <div class="india-grid-full" ng-if="!newSubmission.programs">
+                <div class="india-width-one-half">
+                    <p>Does {{ currentPersonInfo.firstName }} earn an income from work, social security, disability, or any other external source?</p>
+                </div>
+                <div class="india-width-one-half">
+                    <p>
+                        <input type="radio" id="incomeYes" name="incomeYes" ng-value="true" ng-model="currentPersonInfo.income" required>
+                        <label for="incomeYes" ng-click="formSubmitted = false">Yes</label>
+                        <input type="radio" id="incomeNo" name="incomeNo" ng-value="false" ng-model="currentPersonInfo.income" ng-change="currentPersonInfo.incomeAmount = ''; currentPersonInfo.incomeFrequency = ''">
+                        <label for="incomeNo">No</label>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="india-grid-full error-wrapper ng-slide-down" ng-form="subForm" ng-class="{ 'india-input-error' : userForm.subForm.$invalid && formSubmitted } " ng-if="currentPersonInfo.income">
+        	<div class="india-width-one-half">
+                <p>Write {{ currentPersonInfo.firstName }}'s income here (before tax).</p>
+        	</div>
+        	<div class="india-width-one-half">
+        		<div class="india-grid-full income-input">
+                    <div class="india-width-one-half">
+                        <label>How much?</label>
+                        <div class="dollar-sign">
+                        	<input type="number" ng-model="currentPersonInfo.incomeAmount" name="incomeAmount" required>
+                    	</div>
+                    </div>
+                    <div class="india-width-one-half">
+                        <label for="frequency">How often?</label>
+                            <select
+                            name="incomeFrequency"
+                            id="frequency"
+                            ng-model="currentPersonInfo.incomeFrequency"
+                            ng-options="item.id as item.name for item in frequencyValues"
+                            required>
+                            </select>
+                            <i class="fa fa-question-circle" ng-click="$parent.showModal = true"></i>
+                    </div>
+                </div>
+        	</div>
+    	</div>
+        <div class="india-grid-full ng-slide-down" ng-if="userForm.$valid &&currentPersonInfo.incomeFrequency">
+            <div class="india-alert india-alert-info">
+                <div class="india-alert-body">
+                  <p class="india-alert-text">The income information is really important. You said {{ currentPersonInfo.firstName }} makes ${{ currentPersonInfo.incomeAmount * currentPersonInfo.incomeFrequency }} per year. If that sounds right, go ahead and continue.</p>
+                </div>
+            </div>
+        </div>
+        <div class="india-input-error india-grid-full ng-slide-down" ng-if="userForm.$invalid && formSubmitted"><p class="india-input-error-message">You're missing some information. All of these questions are required.</p></div>
+    </div>
+    <footer class="footer-controls clearfix">
+        <button type="Submit" class="india-button primary-action">Next</button>
+        <div ng-click="goBack();" class="back-button"><i class="fa fa-angle-left"></i>Back</div>
+    </footer>
+    <div class="modal-wrapper" ng-show="showModal">
+        <div class="modal-container">
+            <p>This field indicates how often the income amount is earned. For example:</p>
+            <p><strong>2x per month:</strong> some months have 5 weeks, but if you get paid exactly twice per month then you're paid 24 times per year.</p>
+            <p><strong>Bi-weekly:</strong> this is exactly every other week, or 26 times a year (because there are 52 weeks in a year).</p>
+            <i class="fa fa-times-circle" ng-click="showModal = false"></i>
+        </div>
+    </div>
+</form>

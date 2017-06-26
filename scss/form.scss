@@ -1,0 +1,246 @@
+body form {
+	max-width: none;
+}
+
+form button[type="submit"], form input[type="submit"] {
+	margin: 0;
+}
+
+form input[type="radio"] + label {
+	width: 80px;
+	display: inline-block;
+	margin-top: 0;
+}
+
+input:disabled {
+	background: $color-gray-lightest;
+	border: 1px solid $color-gray-light;
+	color: $color-base;
+}
+
+
+.usa-grid, .usa-grid-full, .usa-grid-one-whole {
+	label {
+		margin: 0;
+	}
+	.dollar-sign {
+		position: relative;
+		&:before {
+			content: "$";
+			position: absolute;
+			top: 11px;
+			left: 8px;
+		}
+		input[type="number"] {
+			padding-left: 20px;
+		}
+	}
+	.ssn {
+		position: relative;
+		&:before {
+			content: "XXX-XX-";
+			color: $color-gray-light;
+			position: absolute;
+			top: 11px;
+			left: 8px;
+		}
+		input[type="number"] {
+			padding-left: 62px;
+		}
+	}
+}
+
+
+
+.contact-form {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	flex-direction: row;
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
+	max-width: 460px;
+	-webkit-align-items: flex-end;
+  	align-items: flex-end;
+	margin: 0 -10px;
+	@media screen and (max-width: 599px) {
+		margin-right: 5px;
+	}
+  	.usa-grid-full {
+  		margin: 0;
+  	}
+  	span {
+  		color: $color-secondary;
+  	}
+  	.flex-item {
+  		min-width: 60px;
+  		padding: 0 10px;
+  		width: 200px;
+  		@media screen and (max-width: 480px) {
+  			padding: 0 5px;
+  		}
+  		input {
+  			margin: 2px;
+  		}
+  		&.icon {
+  			width: 25px;
+  			flex: 0 0 5%;
+  			font-size: 24px;
+  			min-width: initial;
+  		}
+  		&.size-1 {
+  			flex: 1 0 20%;
+  		}
+  		&.size-2 {
+  			flex: 3 0 25%;
+  		}
+  		&.size-3 {
+  			flex: 2 0 40%;
+  		}
+  		&.size-4 {
+  			flex: 4 0 60%;
+  		}
+  	}
+  	label {
+  		margin-top: 1.5rem;
+  	}
+}
+
+.user-table {
+	align-items: center;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	flex-direction: row;
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-align-items: flex-end;
+  	align-items: flex-end;
+  	padding: 0 25px;
+  	position: relative;
+  	@media screen and (max-width: 480px) {
+  		border-bottom: 1px solid $color-gray-light;
+  		padding-bottom: 20px;
+  		margin-bottom: 20px;
+  	}
+  	.flex-item {
+  		padding: 0 5px;
+  		label {
+  			display: none;
+  			@media screen and (max-width: 480px) {
+  				display: block;
+  			}
+  		}
+  	}
+	.first-name {
+		flex: 2 1 auto;
+		width: 100px;
+	}
+	.last-name {
+		flex: 2 1 auto;
+		width: 100px;
+		@media all and (max-width: 480px) {
+			width: 240px;
+		}
+	}
+	.size-mi {
+		flex: 0 0 auto;
+		width: 70px;
+	}
+	.user-icon, .delete-icon {
+		position: absolute;
+		top: 10px;
+		left: 0;
+		color: $color-gray-light;
+		font-size: 24px;
+		@media screen and (max-width: 480px) {
+			top: 30px;
+		}
+	}
+	.delete-icon {
+		right: 0;
+		left: initial;
+		color: $color-secondary;
+		cursor: pointer;
+	}
+	&.no-delete {
+		.delete-icon {
+			display: none;
+		}
+	}
+	&.header {
+		@media screen and (max-width: 480px) {
+			display: none;
+		}
+	}
+
+}
+
+.add-button {
+	color: $color-green;
+	cursor: pointer;
+	margin-top: 10px;
+	display: inline-block;
+	.fa {
+		font-size: 24px;
+		margin-right: 8px;
+		vertical-align: middle;
+	}
+}
+
+.ng-slide-down {
+	transition: opacity .3s;
+	&.showing {
+		opacity: 1;
+	}
+	&.hiding {
+		opacity: 0;
+	}
+}
+
+.usa-accordion-bordered {
+	button {
+		cursor: initial;
+		background-image: none;
+		&:hover {
+			background: $color-gray-lightest;
+		}
+		&:focus {
+			box-shadow: none;
+		}
+	}
+	a {
+		word-break: break-all;
+	}
+}
+
+.flex-help {
+	display: -webkit-flex;
+	display: flex;
+}
+
+.income-input {
+	padding-right: 30px;
+	.usa-width-one-half {
+		position: relative;
+	}
+	.fa-question-circle {
+		position: absolute;
+		bottom: 12px;
+		right: -30px;
+		font-size: 24px;
+		color: $color-gray-light;
+		cursor: pointer;
+	}
+}
+.usa-input-error {
+	.income-input {
+		.fa-question-circle {
+			right: -42px;
+		}
+	}	
+}
+
+button:disabled {
+	background: $color-gray-light;
+}

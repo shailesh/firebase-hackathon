@@ -1,0 +1,40 @@
+.user-table {
+	tr.usa-input-error {
+		border-left: 3px solid $color-secondary-dark;
+	}
+	input.input-error {
+		border: 3px solid $color-secondary-dark;
+		margin: 0;
+	}
+}
+
+.error-wrapper {
+	margin: 0;
+	transition: margin .5s;
+}
+
+.usa-input-error {
+	padding-top: 0;
+	padding-bottom: 0;
+	transition: padding-top .5s, padding-bottom .5s, margin .5s;
+	select {
+	    border: 3px solid $color-secondary-dark;
+    	width: calc(100% + 1.5rem);
+	}
+}
+
+.usa-input-error-message {
+	display: inline-block;
+	width: 100%;
+}
+
+.text-form {
+	.input-error {
+		input {
+			border: 3px solid $color-secondary-dark;
+			margin: 0;
+		}
+	}
+}
+
+
